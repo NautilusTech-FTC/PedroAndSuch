@@ -5,14 +5,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveTrain {
-    private DcMotor fL;
-    private DcMotor fR;
-    private DcMotor bR;
-    private DcMotor bL;
+    private final DcMotor fL;
+    private final DcMotor fR;
+    private final DcMotor bR;
+    private final DcMotor bL;
 
-    // note: the code of the other option will be deleted once one option has been confirmed.
-
-    // Option 1:
     public DriveTrain(
             HardwareMap hardwareMap,
             String fL, String fR, String bR, String bL,
@@ -31,35 +28,8 @@ public class DriveTrain {
         this.fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         this.bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         this.bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    } // We'll just declare and instantiate separately.
-
-
-    // Option 2:
-    public DriveTrain() {
-        //empty constructor
     }
 
-    public void initialize(
-            HardwareMap hardwareMap,
-            String fL, String fR, String bR, String bL,
-            DcMotorSimple.Direction fLDir, DcMotorSimple.Direction fRDir, DcMotorSimple.Direction bRDir, DcMotorSimple.Direction bLDir) {
-        this.fL = hardwareMap.get(DcMotor.class, fL);
-        this.fR = hardwareMap.get(DcMotor.class, fR);
-        this.bR = hardwareMap.get(DcMotor.class, bR);
-        this.bL = hardwareMap.get(DcMotor.class, bL);
-
-        this.fL.setDirection(fLDir);
-        this.fR.setDirection(fRDir);
-        this.bR.setDirection(bRDir);
-        this.bL.setDirection(bLDir);
-
-        this.fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
-
-    // Method to Move Bot:
     public void operate(double forward, double strafe, double rotate) {
         double denom = Math.max(Math.abs(forward) + Math.abs(strafe) + Math.abs(rotate), 1);
 

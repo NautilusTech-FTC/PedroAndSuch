@@ -27,17 +27,7 @@ public class Main2 extends OpMode {
     public void loop() {
         ctrlVars();
 
-        if (lB && !rB) {
-            intake.setIntakePower(-1 + lT);
-            intake.setTransferPower(-0.75);
-        } else if (rB && !lB) {
-            intake.setIntakePower(1 - lT);
-            intake.setTransferPower(0.75);
-        } else {
-            intake.setIntakePower(0);
-            intake.setTransferPower(0);
-        }
-
+        intake.intakeTransfer(lB, rB, lT);
         drive.operate(lSY, lSX, rSX);
     }
 
@@ -50,6 +40,5 @@ public class Main2 extends OpMode {
         lB = gamepad1.left_bumper;
         rB = gamepad1.right_bumper;
 
-        if (lT <= 0.1) {lT = 0.1;}
     }
 }

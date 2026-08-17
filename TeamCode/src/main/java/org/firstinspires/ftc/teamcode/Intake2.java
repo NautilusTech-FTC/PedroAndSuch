@@ -5,15 +5,42 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake2 {
-    private DcMotor intake;
-    private CRServo transfer;
+    private final DcMotor intake;
+    private final CRServo transfer;
+
+    private double minPower = 0.1;
+    private double maxPower = 1.0;
+    private double transferSpeed = 0.75;
 
     public Intake2(HardwareMap hardwareMap, String intake, String transfer) {
         this.intake = hardwareMap.get(DcMotor.class, intake);
         this.transfer = hardwareMap.get(CRServo.class, transfer);
     }
 
-    public void setIntakePower(double power) {intake.setPower(power);}
+    public void setMinPower(double minPower) {
+        this.minPower = minPower;
+    }
 
-    public void setTransferPower (double power) {transfer.setPower(power);}
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
+    }
+
+    public void setTransferSpeed(double transferSpeed) {
+        this.transferSpeed = transferSpeed;
+    }
+
+    public void intakeTransfer(boolean in, boolean out, double brakes) {
+        double brakePower = Math.max(brakes, minPower);
+
+        if (in && !out) {
+            intake.setPower(-maxPower + brakePower);
+            transfer.setPower(-transferSpeed);
+        } else if (out && !in) {
+            intake.setPower(maxPower - brakePower);
+            transfer.setPower(transferSpeed);
+        } else {
+            intake.setPower(0);
+            transfer.setPower(0);
+        }
+    }
 }
