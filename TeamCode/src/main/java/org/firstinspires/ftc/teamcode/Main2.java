@@ -28,7 +28,7 @@ public class Main2 extends OpMode {
         ctrlVars();
 
         intake.intakeTransfer(lB, rB, lT);
-        drive.operate(lSY, lSX, rSX);
+        drive.operate(lSY, lSX, rSX, rT);
     }
 
     private void ctrlVars() {

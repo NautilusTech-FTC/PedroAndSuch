@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.configuration.ServoFlavor;
 
 public class Intake2 {
     private final DcMotor intake;
@@ -30,13 +31,12 @@ public class Intake2 {
     }
 
     public void intakeTransfer(boolean in, boolean out, double brakes) {
-        double brakePower = Math.max(brakes, minPower);
 
         if (in && !out) {
-            intake.setPower(-maxPower + brakePower);
+            intake.setPower(Math.min(-maxPower + brakes, -minPower));
             transfer.setPower(-transferSpeed);
         } else if (out && !in) {
-            intake.setPower(maxPower - brakePower);
+            intake.setPower(Math.max(maxPower - brakes, minPower));
             transfer.setPower(transferSpeed);
         } else {
             intake.setPower(0);

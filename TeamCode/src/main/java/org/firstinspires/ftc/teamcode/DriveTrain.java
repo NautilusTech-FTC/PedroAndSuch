@@ -10,6 +10,8 @@ public class DriveTrain {
     private final DcMotor bR;
     private final DcMotor bL;
 
+    private double minPower = 0.1;
+
     public DriveTrain(
             HardwareMap hardwareMap,
             String fL, String fR, String bR, String bL,
@@ -30,12 +32,17 @@ public class DriveTrain {
         this.bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void operate(double forward, double strafe, double rotate) {
-        double denom = Math.max(Math.abs(forward) + Math.abs(strafe) + Math.abs(rotate), 1);
+    public void setMinPower(double minPower) {
+        this.minPower = minPower;
+    }
 
-        fL.setPower((-forward + strafe + rotate) / denom);
-        fR.setPower((-forward - strafe - rotate) / denom);
-        bR.setPower((-forward + strafe - rotate) / denom);
-        bL.setPower((-forward - strafe + rotate) / denom);
+    public void operate(double forward, double strafe, double rotate, double brakes) {
+        double denom = Math.max(Math.abs(forward) + Math.abs(strafe) + Math.abs(rotate), 1);
+        brakes = 1 - brakes * (1 - minPower);
+
+        fL.setPower(((-forward + strafe + rotate) / denom) * brakes);
+        fR.setPower(((-forward - strafe - rotate) / denom) * brakes);
+        bR.setPower(((-forward + strafe - rotate) / denom) * brakes);
+        bL.setPower(((-forward - strafe + rotate) / denom) * brakes);
     }
 }
