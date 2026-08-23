@@ -12,6 +12,7 @@ public class Main extends OpMode {
     private DcMotor bR;
     private DcMotor bL;
     private Intake intake = new Intake();
+    private Shooter shooter = new Shooter();
 
     double lSY;
     double lSX;
@@ -20,7 +21,9 @@ public class Main extends OpMode {
     double rT;
     boolean lB;
     boolean rB;
-
+    boolean x;
+    boolean a;
+    boolean b;
     double denom;
 
     @Override
@@ -40,6 +43,7 @@ public class Main extends OpMode {
         bR.setDirection(DcMotorSimple.Direction.FORWARD);
         bL.setDirection(DcMotorSimple.Direction.REVERSE);
         intake.init(hardwareMap);
+        shooter.init(hardwareMap);
     }
 
     @Override
@@ -59,6 +63,18 @@ public class Main extends OpMode {
         } else {
             intake.setPowerTransfer(0);
         }
+
+        if (x) {
+            shooter.startMotor();
+        } else if (b) {
+            shooter.stopMotor();
+        }
+
+        if(a) {
+            shooter.setKickerPosition(0.84);
+        } else {
+            shooter.setKickerPosition(0.97);
+        }
     }
 
     private void setCtrlVars() {
@@ -69,6 +85,9 @@ public class Main extends OpMode {
         rT = gamepad1.right_trigger;
         lB = gamepad1.left_bumper;
         rB = gamepad1.right_bumper;
+        x = gamepad1.x;
+        b = gamepad1.b;
+        a = gamepad1.a;
 
         denom = Math.max(Math.abs(lSY) + Math.abs(lSX) + Math.abs(rSX), 1);
     }
