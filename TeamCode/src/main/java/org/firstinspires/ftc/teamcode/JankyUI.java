@@ -5,8 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Autonomous
 public class JankyUI extends OpMode {
-    String[] allianceSelection = {"Red Alliance", "Blue Alliance"};
-    int currentAlliance = 0;
+    Robot.alliances alSelect;
+    Robot.drives dSelect;
+    Robot.startPositions sSelect;
+    Robot.autos auSelect;
+
+    Robot.alliances[] alliances = Robot.alliances.values();
+    Robot.drives[] drives = Robot.drives.values();
+    Robot.startPositions[] startPositions = Robot.startPositions.values();
+    Robot.autos[] autos = Robot.autos.values();
+
+    int selection = 0;
+    int selectionThing = 0;
 
     @Override
     public void init() {
@@ -15,8 +25,48 @@ public class JankyUI extends OpMode {
 
     @Override
     public void init_loop() {
-        telemetry.addData("Team Select", changeSelection(allianceSelection));
-        telemetry.update();
+        changeSelectionArea();
+        loopThroughOptions();
+
+        if (selectionThing == 0) {
+            telemetry.addData("> alliance: ", alSelect);
+        } else {
+            telemetry.addData("alliance: ", alSelect);
+        }
+
+        if (selectionThing == 1) {
+            telemetry.addData("> drive: ", dSelect);
+        } else {
+            telemetry.addData("drive: ", dSelect);
+        }
+
+        if (selectionThing == 2) {
+            telemetry.addData("> start position: ", sSelect);
+        } else {
+            telemetry.addData("start position: ", sSelect);
+        }
+
+        if (selectionThing == 3) {
+            telemetry.addData("> auto: ", auSelect);
+        } else {
+            telemetry.addData("auto: ", auSelect);
+        }
+
+        if (selectionThing == 4) {
+            telemetry.addData("Selection complete!", "Press START to submit or B to restart");
+            if (gamepad1.b) {
+                selectionThing = 0;
+            }
+        }
+    }
+
+    @Override
+    public void start() {
+        Robot.Infoz.alliance = alSelect;
+        Robot.Infoz.drive = dSelect;
+        Robot.Infoz.startPosition = sSelect;
+        Robot.Infoz.auto = auSelect;
+        telemetry.addData("Everything's submitted!", "Next match is gonna be great!");
     }
 
     @Override
@@ -24,17 +74,36 @@ public class JankyUI extends OpMode {
 
     }
 
-    String changeSelection (String[] array) {
+    void loopThroughOptions () {
         if (gamepad1.dpad_right) {
-            currentAlliance++;
-        } else if (gamepad1.dpad_left) {
-            currentAlliance--;
+            selection++;
+        }
+        if (gamepad1.dpad_left) {
+            selection--;
         }
 
-        if (currentAlliance > (allianceSelection.length-1)) {
-            currentAlliance = 0;
+        switch (selectionThing) {
+            case 0:
+                alSelect = alliances[(selection % alliances.length)];
+                break;
+            case 1:
+                dSelect = drives[(selection % drives.length)];
+                break;
+            case 2:
+                sSelect = startPositions[(selection % startPositions.length)];
+                break;
+            case 3:
+                auSelect = autos[(selection % autos.length)];
+                break;
         }
+    }
 
-        return array[currentAlliance];
+    void changeSelectionArea () {
+        if (gamepad1.a) {
+            selection = 0;
+            if (selectionThing < 4) {
+                selectionThing++;
+            }
+        }
     }
 }
