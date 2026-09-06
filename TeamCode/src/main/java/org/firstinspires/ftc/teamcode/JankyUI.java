@@ -81,6 +81,9 @@ public class JankyUI extends OpMode {
         if (gamepad1.dpad_left) {
             selection--;
         }
+        if (selection < 0) {
+            selection = 4;
+        }
 
         switch (selectionThing) {
             case 0:
@@ -99,7 +102,7 @@ public class JankyUI extends OpMode {
     }
 
     void changeSelectionArea () {
-        if (gamepad1.a) {
+        if (gamepad1.aWasPressed()) {
             selection = 0;
             if (selectionThing < 4) {
                 selectionThing++;
