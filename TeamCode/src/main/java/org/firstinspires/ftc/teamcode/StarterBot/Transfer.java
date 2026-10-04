@@ -10,7 +10,6 @@ public class Transfer {
     public void init(HardwareMap hardwareMap) {
         CRServo1 = hardwareMap.get(CRServo.class, "Transfer");
         CRServo1.setDirection(DcMotorSimple.Direction.FORWARD);
-        // does forward or reverse matter
     }
 
     public void setPowerTransfer (double power) {

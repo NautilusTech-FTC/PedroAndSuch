@@ -22,13 +22,13 @@ public class teleOp extends OpMode {
 
         if(gamepad1.y) {
             intake.setPowerIntake(1);
-            intake.setPowerTransfer(1);
+            intake.setPowerWheels(-1);
         } else {
             intake.setPowerIntake(0);
-            intake.setPowerTransfer(0);
+            intake.setPowerWheels(0);
         }
 
-        if(gamepad1.b) {
+        if(gamepad1.bWasPressed()) {
             transfer.setPowerTransfer(1);
         } else {
             transfer.setPowerTransfer(0);

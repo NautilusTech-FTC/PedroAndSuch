@@ -21,7 +21,7 @@ public class Intake {
     public void setPowerIntake (double power) {
         intake.setPower(power);
     }
-    public void setPowerTransfer (double power) {
+    public void setPowerWheels(double power) {
         CRServo1.setPower(power);
         CRServo2.setPower(power);
     }
