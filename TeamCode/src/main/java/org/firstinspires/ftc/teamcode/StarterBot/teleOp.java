@@ -28,11 +28,11 @@ public class teleOp extends OpMode {
             intake.setPowerWheels(0);
         }
 
-        if(gamepad1.bWasPressed()) {
+        if(gamepad1.b) {
             transfer.setPowerTransfer(1);
-        } else {
+        } /*else {
             transfer.setPowerTransfer(0);
-        }
+        } */
 
         if(gamepad1.a) {
             shooter.setPowerShooter(0.5);
