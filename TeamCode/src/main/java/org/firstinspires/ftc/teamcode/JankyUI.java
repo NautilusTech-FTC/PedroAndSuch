@@ -81,21 +81,31 @@ public class JankyUI extends OpMode {
         if (gamepad1.dpad_left) {
             selection--;
         }
-        if (selection < 0) {
-            selection = 4;
-        }
+
 
         switch (selectionThing) {
             case 0:
+                if (selection < 0) {
+                    selection = alliances.length - 1;
+                }
                 alSelect = alliances[(selection % alliances.length)];
                 break;
             case 1:
+                if (selection < 0) {
+                    selection = drives.length - 1;
+                }
                 dSelect = drives[(selection % drives.length)];
                 break;
             case 2:
+                if (selection < 0) {
+                    selection = startPositions.length - 1;
+                }
                 sSelect = startPositions[(selection % startPositions.length)];
                 break;
             case 3:
+                if (selection < 0) {
+                    selection = autos.length - 1;
+                }
                 auSelect = autos[(selection % autos.length)];
                 break;
         }
