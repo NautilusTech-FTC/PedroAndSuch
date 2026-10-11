@@ -30,9 +30,9 @@ public class teleOp extends OpMode {
 
         if(gamepad1.b) {
             transfer.setPowerTransfer(1);
-        } /*else {
+        } else {
             transfer.setPowerTransfer(0);
-        } */
+        }
 
         if(gamepad1.a) {
             shooter.setPowerShooter(0.5);
