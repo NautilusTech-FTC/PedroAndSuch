@@ -40,10 +40,10 @@ public class teleOp extends OpMode {
         }
 
         if (gamepad1.x) {
-            shooter.setPowerShooter(0.5);
+            shooter.setShooterVelocity(1320);
         }
         if (gamepad1.b) {
-            shooter.setPowerShooter(0);
+            shooter.setShooterVelocity(0);
         }
 
         double shooterVelocity = shooter.getShooterVelocity();

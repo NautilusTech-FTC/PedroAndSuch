@@ -11,8 +11,8 @@ public class Shooter {
         shooter = hardwareMap.get(DcMotorEx.class, "Shooter");
     }
 
-    public void setPowerShooter (double power) {
-        shooter.setPower(power);
+    public void setShooterVelocity (double velocity) {
+        shooter.setVelocity(velocity);
     }
 
     public double getShooterVelocity () {
