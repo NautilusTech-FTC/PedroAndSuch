@@ -45,5 +45,8 @@ public class teleOp extends OpMode {
         if (gamepad1.b) {
             shooter.setPowerShooter(0);
         }
+
+        double shooterVelocity = shooter.getShooterVelocity();
+        telemetry.addData("Shooter Velocity: ", shooterVelocity);
     }
 }
