@@ -16,6 +16,6 @@ public class Shooter {
     }
 
     public double getShooterVelocity () {
-        shooter.getVelocity();
+        return shooter.getVelocity();
     }
 }
