@@ -1,17 +1,21 @@
 package org.firstinspires.ftc.teamcode.StarterBot;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Shooter {
 
-    private DcMotor shooter;
+    private DcMotorEx shooter;
 
     public void init(HardwareMap hardwareMap) {
-        shooter = hardwareMap.get(DcMotor.class, "Shooter");
+        shooter = hardwareMap.get(DcMotorEx.class, "Shooter");
     }
 
     public void setPowerShooter (double power) {
         shooter.setPower(power);
+    }
+
+    public double getShooterVelocity () {
+        shooter.getVelocity();
     }
 }
