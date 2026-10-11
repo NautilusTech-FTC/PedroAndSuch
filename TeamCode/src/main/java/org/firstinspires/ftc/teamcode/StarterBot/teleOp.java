@@ -20,10 +20,10 @@ public class teleOp extends OpMode {
     public void loop() {
         drive.robotCentric(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             intake.setPowerIntake(1);
             intake.setPowerWheels(-1);
-        } else if (gamepad1.right_bumper) {
+        } else if (gamepad2.right_bumper) {
             intake.setPowerIntake(-1);
             intake.setPowerWheels(1);
         } else {
@@ -31,18 +31,18 @@ public class teleOp extends OpMode {
             intake.setPowerWheels(0);
         }
 
-        if (gamepad1.y) {
+        if (gamepad2.y) {
             transfer.setPowerTransfer(1);
-        } else if (gamepad1.a) {
+        } else if (gamepad2.a) {
             transfer.setPowerTransfer(-1);
         } else {
             transfer.setPowerTransfer(0);
         }
 
-        if (gamepad1.x) {
+        if (gamepad2.x) {
             shooter.setShooterVelocity(1320);
         }
-        if (gamepad1.b) {
+        if (gamepad2.b) {
             shooter.setShooterVelocity(0);
         }
 
