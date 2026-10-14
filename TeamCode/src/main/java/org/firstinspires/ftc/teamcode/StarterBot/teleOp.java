@@ -9,12 +9,14 @@ public class teleOp extends OpMode {
     Intake intake = new Intake();
     Transfer transfer = new Transfer();
     Shooter shooter = new Shooter();
+    LED led = new LED();
 
     public void init() {
         drive.init(hardwareMap);
         intake.init(hardwareMap);
         transfer.init(hardwareMap);
         shooter.init(hardwareMap);
+        led.init(hardwareMap);
     }
 
     public void loop() {
@@ -47,6 +49,7 @@ public class teleOp extends OpMode {
         }
 
         double shooterVelocity = shooter.getShooterVelocity();
+        led.shooterReadiness(shooterVelocity);
         telemetry.addData("Shooter Velocity: ", shooterVelocity);
     }
 }
