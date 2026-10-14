@@ -12,9 +12,11 @@ public class LED {
 
     public void shooterReadiness(double shooterVelocity) {
         if (shooterVelocity < 1320) {
-            led.setPosition(0.315); //supposedly "orange"
+            led.setPosition(0.315); //orange
         } else if (shooterVelocity >= 1320 && shooterVelocity <= 1340) {
-            led.setPosition(0.684); //supposedly "navy"
+            led.setPosition(0.611); //royal
+        } else if (shooterVelocity == 0) {
+            led.setPosition(0); //off
         } else {
             led.setPosition(1); //white
         }
